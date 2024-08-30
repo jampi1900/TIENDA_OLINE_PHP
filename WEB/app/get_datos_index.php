@@ -1,0 +1,17 @@
+
+<?php
+
+
+$SQL_CATEGORIAS = "SELECT B.PK_Categoria,B.Foto,B.Nombre_Categoria,B.Descripcion,B.FK_Estado FROM CATEGORIAS AS B WHERE B.FK_Estado NOT IN ('2','3')";
+$DATOS_CATEGORIAS = $conexion->query($SQL_CATEGORIAS);
+
+$SQL_PRODUCTOS = "SELECT * FROM DET_COLOR AS E 
+INNER JOIN MARCAS AS B ON E.FK_Marca = B.PK_Marca  
+INNER JOIN CATEGORIAS AS C ON E.FK_Categoria = C.PK_Categoria 
+INNER JOIN ESTADOS AS D ON E.FK_Estado = D.PK_Estado
+INNER JOIN COLORES AS F ON F.PK_Color = E.FK_Color
+INNER JOIN ETIQUETA AS G ON G.PK_Etiqueta = E.FK_Etiqueta
+WHERE E.FK_Estado <>  '3'"; // ELIMINADO
+$DATOS_PRODUCTOS = $conexion->query($SQL_PRODUCTOS);
+
+?>

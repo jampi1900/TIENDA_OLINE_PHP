@@ -1,0 +1,15 @@
+<?php
+
+$SQL_ESTADOS = "SELECT A.PK_Estado,A.Name_Estado FROM ESTADOS AS A  WHERE A.PK_Estado IN ('1','2')";
+$DATOS_ESTADOS = $conexion->query($SQL_ESTADOS);
+
+$SQL_CATEGORIAS = "SELECT B.PK_Categoria,B.Foto,B.Nombre_Categoria,B.Descripcion,B.FK_Estado FROM CATEGORIAS AS B WHERE B.FK_Estado NOT IN ('2','3')";
+$DATOS_CATEGORIAS = $conexion->query($SQL_CATEGORIAS);
+
+$SQL_MARCAS = "SELECT C.PK_Marca,C.Nombre_Marca,C.FK_Estado FROM MARCAS AS C  WHERE C.FK_Estado NOT IN ('2','3')";
+$DATOS_MARCAS = $conexion->query($SQL_MARCAS);
+
+// MODELOS Y CADA MODELO TIENE SUS COLORES Y CADA COLORES TIENE SUS TALLLAS
+$SQL_MODELOS = "SELECT *,A.Foto FROM PRODUCTOS AS A INNER JOIN MARCAS AS B ON A.FK_Marca = B.PK_Marca  INNER JOIN CATEGORIAS AS C ON A.FK_Categoria = C.PK_Categoria INNER JOIN ESTADOS AS D ON A.FK_Estado = D.PK_Estado
+WHERE A.FK_Estado<> '3'";
+$DATOS_MODELOS = $conexion->query($SQL_MODELOS);
